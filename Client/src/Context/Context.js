@@ -60,7 +60,7 @@ const PetProvider = ({ children }) => {
       toast.error(error.response.data.message);
     }
   };
-
+//changes
   const addToCart = async (productID) => {
     try {
       await axios.post(`/api/users/${userID}/cart`, { productID });
@@ -68,10 +68,9 @@ const PetProvider = ({ children }) => {
       setCart(response.data.data);
       toast.success('Added to cart');
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || 'An error occurred');
     }
   };
-
   // Remove an item from the cart
   const removeFromCart = async (productID) => {
     try {

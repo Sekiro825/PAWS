@@ -23,17 +23,16 @@ export default function HomeDashboard() {
         if (orderResponse.status === 200) setOrders(orderResponse.data.data);
         if (usersResponse.status === 200) setProfile(usersResponse.data.data);
       } catch (error) {
-        toast.error(error.response.data.message);
+        toast.error(error.response?.data?.message || 'An error occurred');
       }
     };
 
     fetchData();
   }, [setProfile, setStats]);
 
-  // Reverse product details and user profiles for display as recent
-  const reversedData = [...products].reverse();
-  const reversedProfile = [...profile].reverse();
-
+   // Reverse product details and user profiles for display as recent
+   const reversedData = Array.isArray(products) ? [...products].reverse() : [];
+   const reversedProfile = Array.isArray(profile) ? [...profile].reverse() : [];
   return (
     <div>
       <div className="d-flex justify-content-center align-items-center gap-5 mb-5">

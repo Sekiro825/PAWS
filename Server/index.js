@@ -7,7 +7,13 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./Routes/userRoutes');
 const adminRoutes = require('./Routes/adminRoutes');
 
-app.use(cors());
+// Configure CORS
+const corsOptions = {
+  origin: 'http://localhost:3000', // Replace with your client's URL
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -17,7 +23,10 @@ app.use('/api/users', userRoutes);
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+  ssl: true, 
+})
+.then(() => console.log('Connected to MongoDB'))
+  .catch((error) => console.error('MongoDB connection error:', error.message));
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error: '));

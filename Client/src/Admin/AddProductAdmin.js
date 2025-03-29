@@ -48,7 +48,8 @@ export default function AddProductAdmin() {
         navigate('/dashboard/products');
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || 'An error occurred');
+      console.error(error.response?.data?.message || 'An error occurred');
     }
   };
 

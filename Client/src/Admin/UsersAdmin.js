@@ -17,6 +17,7 @@ export default function UsersAdmin() {
         toast.error(error.response.data.message);
       }
     };
+    
 
     fetchData();
   }, [setProfile]);

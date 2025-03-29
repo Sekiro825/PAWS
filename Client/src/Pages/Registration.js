@@ -18,14 +18,18 @@ function Registration() {
     if (!name || !email || !password) {
       toast.error('Enter All the Inputs');
     }
-
+//changes
     try {
       const userData = { name, email, password };
       const response = await axios.post('/api/users/register', userData);
-      toast.success(response.data.message);
-      navigate('/login');
+      if (response && response.data) {
+        toast.success(response.data.message);
+        navigate('/login');
+      } else {
+        throw new Error('Unexpected response format');
+      }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || 'An error occurred');
     }
   };
 

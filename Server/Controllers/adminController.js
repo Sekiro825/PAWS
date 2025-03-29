@@ -6,7 +6,11 @@ const jwt = require('jsonwebtoken');
 module.exports = {
   login: async (req, res) => {
     const { email, password } = req.body;
-
+    //changes
+ //const email ='admin@admin.com';
+  //const password ='Pawparazzi';
+  console.log(email);
+  console.log(password);
     if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
       const accessToken = jwt.sign({ email }, process.env.ADMIN_ACCESS_TOKEN_SECRET, { expiresIn: '10m' });
       const refreshToken = jwt.sign({ email }, process.env.USER_REFRESH_TOKEN_SECRET, { expiresIn: '1d' });

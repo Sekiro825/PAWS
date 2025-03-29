@@ -25,21 +25,21 @@ export const services = [
     title: 'Free Same-Day Delivery',
     description: 'Order by 2pm local time to get free delivery on orders $35+ today.',
   },
-  {
+  /*{
     imageUrl: 'https://res.cloudinary.com/dmzqckfj4/image/upload/v1706505035/home%20page/kh3aywo5qniy8aew2lsa.png',
     title: '30 Day Return',
     description: '35% off your first order plus 5% off all future orders.',
-  },
+  },*/
   {
     imageUrl: 'https://res.cloudinary.com/dmzqckfj4/image/upload/v1706505058/home%20page/midyf6ltwnn0ffv0queq.png',
     title: 'Security payment',
     description: '25% off your online order of $50+. Available at most locations.',
   },
-  {
+  /*{
     imageUrl: 'https://res.cloudinary.com/dmzqckfj4/image/upload/v1706505081/home%20page/rlh6seaevj1nr1q0d3se.png',
     title: '24/7 Support',
     description: 'Shop online to get orders over $35 shipped fast and free.',
-  },
+  },*/
 ];
 
 export const brandImages = [

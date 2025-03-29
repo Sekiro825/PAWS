@@ -14,32 +14,69 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const email = e.target.email.value.trim().toLowerCase();
+    const email = e.target.email.value.toLowerCase();
+    console.log(email);
     const password = e.target.password.value;
     const loginData = { email, password };
-    const adminEmail = process.env.REACT_APP_ADMIN_EMAIL;
+    //const adminEmail = process.env.REACT_APP_ADMIN_EMAIL;
+    const adminEmail = 'admin@admin.com';
 
     if (!email || !password) {
       return toast.error('Enter All the Inputs');
     }
 
-    const endpoint = email === adminEmail ? '/api/admin/login' : '/api/users/login';
+    const endpoint = (email === adminEmail ? '/api/admin/login' : '/api/users/login');
+//changes
+    //const endpoint = '/api/admin/login';
+    email === adminEmail
+        ? localStorage.setItem('role', 'admin')
+        : localStorage.setItem('userID', 'null');
 
+
+        try {
+          const response = await axios.post(endpoint, loginData);
+          localStorage.setItem('name', response.data.data.name);
+          localStorage.setItem('jwt_token', response.data.data.jwt_token);
+          toast.success(response.data.message);
+          setLoginStatus(true);
+          navigate(email === adminEmail ? '/dashboard' : '/');
+        } catch (error) {
+          console.error('Login Error:', error.response?.data || error.message);
+          toast.error(error.response?.data?.message || 'An error occurred');
+        }
+  };
+  /*const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const email = e.target.email.value.toLowerCase();
+    const password = e.target.password.value;
+    const loginData = { email, password };
+    const adminEmail = 'admin@admin.com';
+  
+    if (!email || !password) {
+      return toast.error('Enter All the Inputs');
+    }
+  
+    const endpoint = email === adminEmail ? '/api/admin/login' : '/api/users/login';
+  
     try {
       const response = await axios.post(endpoint, loginData);
-      email === adminEmail
-        ? localStorage.setItem('role', 'admin')
-        : localStorage.setItem('userID', response.data.data.userID);
-
       localStorage.setItem('name', response.data.data.name);
       localStorage.setItem('jwt_token', response.data.data.jwt_token);
+  
+      // Set userID for non-admin users
+      if (email !== adminEmail) {
+        localStorage.setItem('userID', response.data.data.userID);
+      }
+  
       toast.success(response.data.message);
       setLoginStatus(true);
       navigate(email === adminEmail ? '/dashboard' : '/');
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error('Login Error:', error.response?.data || error.message);
+      toast.error(error.response?.data?.message || 'An error occurred');
     }
-  };
+  };*/
 
   return (
     <MDBContainer className="form-container">

@@ -14,12 +14,15 @@ const Home = () => {
     <div>
       <Header />
       <Categories />
-
       <section className="products d-flex flex-column align-items-center">
         <h1 className="text-black fw-bolder">
           <span>Best</span> Seller
         </h1>
-        <ProductList products={products.slice(0, 8)} />
+        {Array.isArray(products) && products.length > 0 ? (
+          <ProductList products={products.slice(0, 8)} />
+        ) : (
+          <p>No products available</p>
+        )}
       </section>
 
       <Services />
